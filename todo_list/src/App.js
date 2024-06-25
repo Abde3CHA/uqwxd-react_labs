@@ -1,28 +1,37 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
+
 const App = () => {
   const [todos, setTodos] = useState([]);
-  
-  // Add the handlesubmit code here
-  
-  
-  // Add the deleteToDo code here
 
-  
-  // Add the toggleComplete code here
+  const handleAddTodo = (todo) => {
+    // Logic to add a new todo to the list
+    setTodos([...todos, todo]);
+  };
 
-  
-  // Add the submitEdits code here
+  const handleDeleteTodo = (index) => {
+    // Logic to delete a todo from the list
+    const updatedTodos = todos.filter((_, i) => i !== index);
+    setTodos(updatedTodos);
+  };
 
-  
-return(
-<div className ="App">
-<h1>Todo List</h1>
-<form>
-<input type ="text" align ="right" id= 'todoAdd'/>
-<button type ="submit">Add Todo</button>
-</form>
-</div>
-);
+  return (
+    <div className="App">
+      <h1>Todo List</h1>
+      <form>
+        <input type="text" align="right" id='todoAdd' />
+        <button type="submit" onClick={() => handleAddTodo("New Todo")}>Add Todo</button>
+      </form>
+      <ul>
+        {todos.map((todo, index) => (
+          <li key={index}>
+            {todo}
+            <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
+
 export default App;
